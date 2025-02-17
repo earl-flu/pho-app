@@ -1,0 +1,8 @@
+1. User can Add Category
+    -create
+    -index
+2. User can Add Item
+3. User can Add Item Details and price
+--------------- ALL DONE ------------------
+
+4. User can edit item detail

@@ -12,7 +12,7 @@ class PrItemDetailController extends Controller
     public function store(Request $request, $categoryId, $itemId)
     {
         $validated = $request->validate([
-            'description' => 'required|string|max:255',
+            'description' => 'required',
             'uom' => 'required|string|max:50',
             'website_link' => 'nullable|url|max:255',
             'original_price' => 'required|numeric|min:0',
@@ -63,7 +63,7 @@ class PrItemDetailController extends Controller
     public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'description' => 'required|string|max:255',
+            'description' => 'required',
             'uom' => 'required|string|max:50',
             'website_link' => 'nullable|url',
             'original_price' => 'nullable|numeric',

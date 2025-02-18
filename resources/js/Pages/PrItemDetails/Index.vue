@@ -231,7 +231,7 @@ const openEditModal = (itemDetail) => {
 
   <AuthenticatedLayout>
     <!--breadcrumb-->
-    <h3 class="mb-4">PR</h3>
+    <h3 class="mb-4">PR tet</h3>
     <nav aria-label="breadcrumb page-breadcrumb" style="margin-bottom: 30px">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
@@ -627,7 +627,7 @@ const openEditModal = (itemDetail) => {
                             <i class="bi bi-three-dots"></i>
                           </button>
                           <ul class="dropdown-menu" style="">
-                            <li v-show="itemDetail.website_link">
+                            <li>
                               <a
                                 class="dropdown-item"
                                 href="#"

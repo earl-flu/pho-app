@@ -3,7 +3,7 @@
     <div class="control-group">
       <div class="button-group">
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().toggleBold().run()"
           :disabled="!editor.can().chain().focus().toggleBold().run()"
@@ -12,7 +12,7 @@
           Bold
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().toggleItalic().run()"
           :disabled="!editor.can().chain().focus().toggleItalic().run()"
@@ -21,7 +21,7 @@
           Italic
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().toggleStrike().run()"
           :disabled="!editor.can().chain().focus().toggleStrike().run()"
@@ -30,23 +30,23 @@
           Strike
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().unsetAllMarks().run()"
         >
           Clear marks
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().setParagraph().run()"
           :class="{ 'is-active': editor.isActive('paragraph') }"
         >
           Paragraph
         </button>
-        
+
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().toggleBulletList().run()"
           :class="{ 'is-active': editor.isActive('bulletList') }"
@@ -54,7 +54,7 @@
           Bullet list
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().toggleOrderedList().run()"
           :class="{ 'is-active': editor.isActive('orderedList') }"
@@ -62,7 +62,7 @@
           Ordered list
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().undo().run()"
           :disabled="!editor.can().chain().focus().undo().run()"
@@ -70,7 +70,7 @@
           Undo
         </button>
         <button
-         type="button"
+          type="button"
           class="btn btn-outline-info btn-sm"
           @click="editor.chain().focus().redo().run()"
           :disabled="!editor.can().chain().focus().redo().run()"
@@ -138,12 +138,7 @@ onBeforeUnmount(() => {
 
 <style lang="scss">
 /* Basic editor styles */
-.tiptap ul li {
-  list-style-type: disc;
-}
-ol{
-    list-style: auto;
-}
+
 .tiptap {
   :first-child {
     margin-top: 0;

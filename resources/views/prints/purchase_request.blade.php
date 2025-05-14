@@ -12,6 +12,14 @@
             font-size: 13px;
         }
 
+        .list-style ul li {
+            list-style-type: disc;
+        }
+
+        .list-style ul li p {
+            margin: 0;
+        }
+
         span.peso {
             font-family: 'DejaVu Sans', sans-serif;
         }
@@ -220,7 +228,7 @@
                     <tr>
                         <td style="text-align:center;">{{ $loop->iteration }}</td>
                         <td>{{ $item['uom'] }}</td>
-                        <td>{{ $item['item_name'] }}: {{ $item['item_detail']['description'] }}</td>
+                        <td class="list-style">{{ $item['item_name'] }}: {!! $item['item_detail']['description'] !!}</td>
                         <td>{{ $item['quantity'] }}</td>
                         <td><span
                                 class="peso">&#8369;</span>{{ number_format($item['markup_price'], $item['markup_price'] == floor($item['markup_price']) ? 0 : 2) }}

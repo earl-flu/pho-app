@@ -32,13 +32,18 @@ const addItem = (item) => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items.data" :key="item.id" @click="addItem(item)" class="cursor-pointer">
+        <tr
+          v-for="item in items.data"
+          :key="item.id"
+          @click="addItem(item)"
+          class="cursor-pointer"
+        >
           <td>
             <div class="d-flex align-items-center gap-3">
               <p class="mb-0 fw-bold">{{ item.itemName }}</p>
             </div>
           </td>
-          <td v-html="item.description"></td>
+          <td class="tiptap" v-html="item.description"></td>
           <td>
             <p class="mb-0">{{ item.uom }}</p>
           </td>

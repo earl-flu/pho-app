@@ -60,7 +60,7 @@ const formatNumber = (value) => {
                   <p class="mb-0 fw-bold">{{ item.itemName }}</p>
                 </div>
               </td>
-              <td v-html="item.description"></td>
+              <td class="tiptap" v-html="item.description"></td>
               <td>
                 <input
                   type="number"
@@ -246,7 +246,9 @@ const formatNumber = (value) => {
           </div>
         </div>
         <div class="col-md-6">
-          <label for="requested_by_position" class="form-label">Requested by - Position</label>
+          <label for="requested_by_position" class="form-label"
+            >Requested by - Position</label
+          >
           <input
             autocomplete="off"
             type="text"
@@ -261,7 +263,9 @@ const formatNumber = (value) => {
         </div>
 
         <div class="col-md-6">
-          <label for="cash_availability" class="form-label">Cash Availability</label>
+          <label for="cash_availability" class="form-label"
+            >Cash Availability</label
+          >
           <input
             autocomplete="off"
             type="text"
@@ -275,7 +279,9 @@ const formatNumber = (value) => {
           </div>
         </div>
         <div class="col-md-6">
-          <label for="cash_availability_position" class="form-label">Cash Availability - Position</label>
+          <label for="cash_availability_position" class="form-label"
+            >Cash Availability - Position</label
+          >
           <input
             autocomplete="off"
             type="text"
@@ -304,7 +310,9 @@ const formatNumber = (value) => {
           </div>
         </div>
         <div class="col-md-6">
-          <label for="approved_by_position" class="form-label">Approved by - Position</label>
+          <label for="approved_by_position" class="form-label"
+            >Approved by - Position</label
+          >
           <input
             autocomplete="off"
             type="text"

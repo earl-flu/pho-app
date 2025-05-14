@@ -82,8 +82,8 @@ function formattedDate(createdAt) {
             </div>
 
             <!-- Add paper -->
-            <div class="d-flex align-items-start mb-4" style="gap:10px;">
-              <div style="flex: 1;"></div>
+            <div class="d-flex align-items-start mb-4" style="gap: 10px">
+              <div style="flex: 1"></div>
               <Link
                 class="btn btn-primary px-4"
                 :href="route('purchase-requests.create')"
@@ -120,11 +120,10 @@ function formattedDate(createdAt) {
                         <p class="mb-0 fw-bold">{{ item.item_name }}</p>
                       </div>
                     </td>
-                    <td>
-                      <p class="mb-0">
-                        {{ item.item_detail.description }}
-                      </p>
-                    </td>
+                    <td
+                      class="tiptap"
+                      v-html="item.item_detail.description"
+                    ></td>
                     <td>
                       <p class="mb-0">
                         ₱ {{ numberWithComma(item.markup_price) }}

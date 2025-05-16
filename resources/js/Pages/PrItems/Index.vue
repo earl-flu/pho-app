@@ -5,6 +5,7 @@ import { ref, watch } from "vue";
 import { debounce } from "lodash";
 import Pagination from "@/Components/Pagination.vue";
 import { useToast } from "vue-toastification";
+import AddEditItemModal from "@/Components/AddEditItemModal.vue";
 
 const props = defineProps({
   category: {
@@ -26,6 +27,7 @@ const form = useForm({
 
 let name = ref(props.filters.name);
 const addCategoryModal = ref(null);
+const selectedItem = ref(null);
 
 const submit = () => {
   form.post(route("categories.items.store", props.category.id), {
@@ -44,7 +46,7 @@ const submit = () => {
 
 const debouncedFetch = debounce((name) => {
   router.get(
-    route("categories.items", { categoryId: props.category.id }),
+    route("categories.items.index", { categoryId: props.category.id }),
     { name },
     {
       preserveState: true,
@@ -57,6 +59,10 @@ watch([name], (values) => {
   const [name] = values;
   debouncedFetch(name);
 });
+
+const handleEditItem = (item) => {
+  selectedItem.value = item;
+};
 </script>
 
 <template>
@@ -93,68 +99,11 @@ watch([name], (values) => {
                   type="button"
                   class="btn btn-primary px-4"
                   data-bs-toggle="modal"
-                  data-bs-target="#addCategoryModal"
+                  data-bs-target="#addItemModal"
                 >
                   <i class="bi bi-plus-lg me-2"></i>
                   Add New Item
                 </button>
-                <!-- Modal -->
-                <div
-                  class="modal fade"
-                  id="addCategoryModal"
-                  ref="addCategoryModal"
-                  aria-hidden="true"
-                  style="display: none"
-                >
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <form class="" @submit.prevent="submit">
-                        <div class="modal-header border-bottom-0 py-2">
-                          <h5 class="modal-title">Add Item</h5>
-                          <a
-                            href="javascript:;"
-                            class="primaery-menu-close"
-                            data-bs-dismiss="modal"
-                          >
-                            <i class="material-icons-outlined">close</i>
-                          </a>
-                        </div>
-                        <div class="modal-body">
-                          <div class="col-md-12">
-                            <label for="name" class="form-label">Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              v-model="form.name"
-                              autocomplete="off"
-                              autofocus
-                              id="name"
-                            />
-                            <div class="invalid-feedback d-block">
-                              {{ form.errors.name }}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer border-top-0">
-                          <button
-                            class="btn btn-grd-info"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                          >
-                            Save
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-grd-danger"
-                            data-bs-dismiss="modal"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <!-- End of add new item -->
@@ -209,6 +158,15 @@ watch([name], (values) => {
                             <i class="bi bi-three-dots"></i>
                           </button>
                           <ul class="dropdown-menu" style="">
+                            <button
+                              type="button"
+                              class="dropdown-item"
+                              data-bs-toggle="modal"
+                              data-bs-target="#editItemModal"
+                              @click="handleEditItem(item)"
+                            >
+                              <i class="bi bi-pencil-square me-2"></i>Edit
+                            </button>
                             <Link
                               :href="
                                 route('items.details.index', {
@@ -236,5 +194,15 @@ watch([name], (values) => {
         </div>
       </div>
     </div>
+
+    <!-- Add Item Modal -->
+    <AddEditItemModal mode="add" :categoryId="$page.props.categoryId" />
+
+    <!-- Edit Item Modal -->
+    <AddEditItemModal
+      mode="edit"
+      :categoryId="$page.props.categoryId"
+      :item="selectedItem"
+    />
   </AuthenticatedLayout>
 </template>

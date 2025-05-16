@@ -26,7 +26,21 @@ class PrItemController extends Controller
             'name' => $validated['name'],
         ]);
 
-        return redirect()->route('categories.items', $categoryId)->with('success', 'Item created successfully.');
+        return redirect()->route('categories.items.index', $categoryId)->with('success', 'Item created successfully.');
+    }
+
+    public function updateItem(Request $request, $categoryId, $itemId)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:pr_items,name,' . $itemId . ',id,category_id,' . $categoryId,
+        ]);
+
+        $item = PrItem::findOrFail($itemId);
+        $item->update([
+            'name' => $validated['name'],
+        ]);
+
+        return redirect()->route('categories.items.index', $categoryId)->with('success', 'Item updated successfully.');
     }
 
 

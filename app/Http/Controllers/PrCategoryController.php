@@ -40,4 +40,20 @@ class PrCategoryController extends Controller
         PrCategory::create($validated);
         return redirect()->route('categories.index');
     }
+
+    public function update(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'name' => 'required|unique:pr_categories,name,' . $id,
+        ]);
+
+        $prCategory = PrCategory::find($id);
+        if (!$prCategory) {
+            abort(404);
+        }
+
+        $prCategory->update($validated);
+
+        return redirect()->route('categories.index')->with('status', 'PR Category updated successfully.');
+    }
 }

@@ -231,14 +231,14 @@ const openEditModal = (itemDetail) => {
 
   <AuthenticatedLayout>
     <!--breadcrumb-->
-    <h3 class="mb-4">PR tet</h3>
+    <h3 class="mb-4">PR</h3>
     <nav aria-label="breadcrumb page-breadcrumb" style="margin-bottom: 30px">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
           <Link :href="route('categories.index')">Categories</Link>
         </li>
         <Link
-          :href="route('categories.items', item.category.id)"
+          :href="route('categories.items.index', item.category.id)"
           class="breadcrumb-item"
         >
           <a href="#">{{ item.category.name }}</a>

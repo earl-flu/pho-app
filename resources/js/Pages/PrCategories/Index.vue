@@ -1,10 +1,10 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, router, useForm } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import { ref, watch } from "vue";
 import { debounce } from "lodash";
 import Pagination from "@/Components/Pagination.vue";
-import { useToast } from "vue-toastification";
+import AddEditCategoryModal from "@/Components/AddEditCategoryModal.vue";
 
 const props = defineProps({
   prCategories: {
@@ -16,27 +16,8 @@ const props = defineProps({
   },
 });
 
-const form = useForm({
-  name: "",
-});
-
 let name = ref(props.filters.name);
-const addCategoryModal = ref(null);
-
-const submit = () => {
-  form.post(route("categories.store"), {
-    onSuccess: () => {
-      const toast = useToast();
-      toast.success("PR Category Saved Successfully", {
-        timeout: 3000,
-      });
-      form.reset();
-
-      // Hide the modal - not working
-      //   addCategoryModal.hide();
-    },
-  });
-};
+const selectedCategory = ref(null);
 
 const debouncedFetch = debounce((name) => {
   router.get(
@@ -53,6 +34,10 @@ watch([name], (values) => {
   const [name] = values;
   debouncedFetch(name);
 });
+
+const handleEditCategory = (category) => {
+  selectedCategory.value = category;
+};
 </script>
 
 <template>
@@ -87,63 +72,6 @@ watch([name], (values) => {
                   <i class="bi bi-plus-lg me-2"></i>
                   Add New Category
                 </button>
-                <!-- Modal -->
-                <div
-                  class="modal fade"
-                  id="addCategoryModal"
-                  ref="addCategoryModal"
-                  aria-hidden="true"
-                  style="display: none"
-                >
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <form class="" @submit.prevent="submit">
-                        <div class="modal-header border-bottom-0 py-2">
-                          <h5 class="modal-title">Add Category</h5>
-                          <a
-                            href="javascript:;"
-                            class="primaery-menu-close"
-                            data-bs-dismiss="modal"
-                          >
-                            <i class="material-icons-outlined">close</i>
-                          </a>
-                        </div>
-                        <div class="modal-body">
-                          <div class="col-md-12">
-                            <label for="name" class="form-label">Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              v-model="form.name"
-                              autocomplete="off"
-                              autofocus
-                              id="name"
-                            />
-                            <div class="invalid-feedback d-block">
-                              {{ form.errors.name }}
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer border-top-0">
-                          <button
-                            class="btn btn-grd-info"
-                            :class="{ 'opacity-25': form.processing }"
-                            :disabled="form.processing"
-                          >
-                            Save
-                          </button>
-                          <button
-                            type="button"
-                            class="btn btn-grd-danger"
-                            data-bs-dismiss="modal"
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <!-- End of add new category -->
@@ -197,14 +125,20 @@ watch([name], (values) => {
                           >
                             <i class="bi bi-three-dots"></i>
                           </button>
-                          <ul class="dropdown-menu" style="">
-                            <!-- <Link :href="route('tags.edit', tag)">
-                              <a class="dropdown-item" href="javascript:;"
-                                ><i class="bi bi-pencil-square me-2"></i>Edit</a
-                              >
-                            </Link> -->
+                          <ul class="dropdown-menu">
+                            <button
+                              type="button"
+                              class="dropdown-item"
+                              data-bs-toggle="modal"
+                              data-bs-target="#editCategoryModal"
+                              @click="handleEditCategory(category)"
+                            >
+                              <i class="bi bi-pencil-square me-2"></i>Edit
+                            </button>
                             <Link
-                              :href="route('categories.items', category.id)"
+                              :href="
+                                route('categories.items.index', category.id)
+                              "
                             >
                               <a class="dropdown-item" href="javascript:;">
                                 <i class="bi bi-arrow-right-circle me-2"></i
@@ -225,5 +159,12 @@ watch([name], (values) => {
         </div>
       </div>
     </div>
+
+    <!--  Renders both instances of the CategoryModal  -->
+    <!-- Add Category Modal -->
+    <AddEditCategoryModal mode="add" />
+
+    <!-- Edit Category Modal -->
+    <AddEditCategoryModal mode="edit" :category="selectedCategory" />
   </AuthenticatedLayout>
 </template>

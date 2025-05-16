@@ -90,11 +90,13 @@ Route::middleware('auth')->group(function () {
         //     'store' => 'can:create pr library',
         //     'index' => 'can:view pr library',
         // ])
-        ->only(['index', 'store']);
+        ->only(['index', 'store', 'update']);
 
     // Items route
-    Route::get('pr/categories/{categoryId}/items', [PrItemController::class, 'getItemsByCategory'])->name('categories.items');
+    Route::get('pr/categories/{categoryId}/items', [PrItemController::class, 'getItemsByCategory'])->name('categories.items.index');
     Route::post('pr/categories/{categoryId}/items', [PrItemController::class, 'storeItem'])->name('categories.items.store');
+    Route::put('pr/categories/{categoryId}/items', [PrItemController::class, 'updateItem'])->name('categories.items.update');
+
 
     // Item Details route
     Route::get(

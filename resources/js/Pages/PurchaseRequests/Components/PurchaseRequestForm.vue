@@ -104,7 +104,7 @@ const formatNumber = (value) => {
         <div class="col-md-12">
           <h6>PR DETAILS</h6>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="name" class="form-label">PR Name</label>
           <input
             autocomplete="off"
@@ -119,7 +119,7 @@ const formatNumber = (value) => {
             {{ form.errors.name }}
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="budget" class="form-label">Select Budget</label>
           <select
             :value="formStore.budget_id"
@@ -140,7 +140,7 @@ const formatNumber = (value) => {
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="number" class="form-label">PR Number</label>
           <input
             autocomplete="off"
@@ -155,7 +155,7 @@ const formatNumber = (value) => {
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label for="status" class="form-label">Select Status</label>
           <select v-model="formStore.status" id="status" class="form-select">
             <option value="approved">Approved</option>

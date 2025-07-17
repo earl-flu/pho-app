@@ -117,7 +117,7 @@ watch([name, status, receivedOnly], (values) => {
             </form>
             <!-- End of search inputs -->
 
-            <!-- Add paper -->
+            <!-- Add PR -->
             <div class="d-flex align-items-start justify-content-between mb-4">
               <div></div>
               <Link
@@ -127,7 +127,7 @@ watch([name, status, receivedOnly], (values) => {
                 <i class="bi bi-plus-lg me-2"></i>Add New PR
               </Link>
             </div>
-            <!-- End of add paper -->
+            <!-- End of add PR -->
 
             <!-- Table -->
             <div class="table-responsive">

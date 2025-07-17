@@ -120,10 +120,9 @@ const formatNumber = (value) => {
 
     <!-- Table -->
     <div class="row g-4">
-      <div class="col-md-5">
+      <!-- <div class="col-md-5">
         <div class="card">
           <div class="card-body">
-            <!-- Search inputs -->
             <form class="row g-3 mb-4">
               <div class="col-6">
                 <label for="searchItemName" class="form-label">Search</label>
@@ -137,15 +136,14 @@ const formatNumber = (value) => {
                 />
               </div>
             </form>
-            <!-- End of search inputs -->
             <ItemsTable :items="items" @addItem="itemsStore.addItem" />
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- End of table -->
 
       <!-- PR Items -->
-      <div class="col-md-7">
+      <div>
         <div class="row">
           <div class="col-md-4">
             <div class="card">
